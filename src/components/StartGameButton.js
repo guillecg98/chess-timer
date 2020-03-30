@@ -11,8 +11,8 @@ const MyButton = styled.button`
   justify-self: center;
 `;
 
-const StartGameButton = ({text}) => (
-    <MyButton>
+const StartGameButton = ({action,text}) => (
+    <MyButton onClick={action}>
         {text}
     </MyButton>
 );
