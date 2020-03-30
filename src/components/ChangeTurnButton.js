@@ -13,7 +13,7 @@ const MyButton = styled.button`
 
 const ChangeTurnButton = ({text}) => (
     <MyButton>
-        {text}
+        {text}'s Turn
     </MyButton>
 );
 

@@ -27,7 +27,7 @@ class App extends Component {
             <p>Counter 1</p>
             <p>Counter 2</p>
           </div>
-          <ChangeTurnButton text={this.state.turn}/>
+          <ChangeTurnButton text={this.props.turn}/>
       </div>
     );
   }
