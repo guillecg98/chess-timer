@@ -13,6 +13,13 @@
   }
 }
 
+.timer{
+  justify-content: center;
+  margin-left: 55px;
+  margin-right: 55px;
+  font-size: 48px;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -25,10 +32,10 @@
 }
 
 .title{
-  margin-top: 30px;
+  margin-top: 20px;
   margin-left: 50px;
   margin-right: 50px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   align-items: center;
   color: black;
   font-size: xxx-large;

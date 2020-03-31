@@ -3,7 +3,20 @@ import './App.css';
 import ChangeTurnButton from './components/ChangeTurnButton'
 import StartGameButton from './components/StartGameButton'
 import { connect } from 'react-redux'
-import { startGame } from './actions/startGame';
+import { startGame } from './actions/startGame'
+import { changeTurn } from './actions/changeTurn'
+import styled from 'styled-components'
+
+const Input = styled.input`
+  justify-content: center;
+  font-size: 18px;
+  padding: 14px;
+  border-color: lightslategray;
+  border-radius: 3px;
+  ::placeholder {
+    color: lightslategray;
+  }
+`;
 
 class App extends Component {
   render(){
@@ -13,10 +26,9 @@ class App extends Component {
           Chess Timer
         </div>
         <div>
-          <h3>Select Game Time per Player</h3>
-          <input type="number" required/>
+          <Input id="time" type="number" placeholder="Minutes"/>
         </div>
-        <StartGameButton action={this.props.onStartGame} text="Start Game"/>
+        <StartGameButton action={() => this.props.onStartGame(document.getElementById('time').value)} text="Start Game"/>
           <div className="columnStyle">
             <p>White Player</p>
             <p>Black Player</p>
@@ -24,10 +36,10 @@ class App extends Component {
             <img src={require('./img/black-pawn.png')} alt="black pawn" height="150" width="150"/>
           </div>
           <div className="columnStyle">
-            <p>Counter 1</p>
-            <p>Counter 2</p>
+          <p className="timer">{this.props.whiteTimeRemaining}</p>
+            <p className="timer">{this.props.blackTimeRemaining}</p>
           </div>
-          <ChangeTurnButton text={this.props.turn}/>
+          <ChangeTurnButton action={this.props.onChangeTurn} text={this.props.turn}/>
       </div>
     );
   }
@@ -36,15 +48,16 @@ class App extends Component {
 const mapStateToProps = (state) => {
   return {
     turn: state.turn,
-    blackTime: state.blackTime,
-    whiteTime: state.whiteTime,
+    blackTimeRemaining: state.blackTimeRemaining,
+    whiteTimeRemaining: state.whiteTimeRemaining,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     //onActions: () => dispatch(action()),
-    onStartGame: () => dispatch(startGame()),
+    onStartGame: (settedTime) => dispatch(startGame(settedTime)),
+    onChangeTurn: () => dispatch(changeTurn()),
   };
 };
 

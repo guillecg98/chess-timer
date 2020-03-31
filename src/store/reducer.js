@@ -1,9 +1,10 @@
 import { START_GAME } from '../actions/startGame'
+import { CHANGE_TURN } from '../actions/changeTurn';
 
 const initialState = {
-    turn: "Somebody",
-    blackTime: 0,
-    whiteTime: 0,
+    turn: 'Somebody',
+    blackTimeRemaining: null,
+    whiteTimeRemaining: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -12,7 +13,16 @@ const reducer = (state = initialState, action) => {
         case START_GAME: {
             return {
                 ...state,
-                turn: "White",
+                turn: 'White',
+                blackTimeRemaining: action.payload,
+                whiteTimeRemaining: action.payload,
+            }
+        }
+
+        case CHANGE_TURN: {
+            return {
+                ...state,
+                turn: state.turn === 'White' ? 'Black' : 'White',
             }
         }
 

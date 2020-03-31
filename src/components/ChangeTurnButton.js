@@ -11,8 +11,8 @@ const MyButton = styled.button`
   justify-self: center;
 `;
 
-const ChangeTurnButton = ({text}) => (
-    <MyButton>
+const ChangeTurnButton = ({action,text}) => (
+    <MyButton onClick={action}>
         {text}'s Turn
     </MyButton>
 );
