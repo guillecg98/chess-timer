@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { startGame } from './actions/startGame'
 import { changeTurn } from './actions/changeTurn'
 import styled from 'styled-components'
+import { decrementWhiteTime } from './actions/decrementWhiteTime';
 
 const Input = styled.input`
   justify-content: center;
@@ -19,6 +20,7 @@ const Input = styled.input`
 `;
 
 class App extends Component {
+
   render(){
     return (
       <div className="App">
@@ -55,9 +57,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    //onActions: () => dispatch(action()),
     onStartGame: (settedTime) => dispatch(startGame(settedTime)),
     onChangeTurn: () => dispatch(changeTurn()),
+    onDecrementWhiteTime: () => dispatch(decrementWhiteTime()),
   };
 };
 
