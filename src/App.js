@@ -6,7 +6,8 @@ import { connect } from 'react-redux'
 import { startGame } from './actions/startGame'
 import { changeTurn } from './actions/changeTurn'
 import styled from 'styled-components'
-import { decrementWhiteTime } from './actions/decrementWhiteTime';
+import { decrementWhiteTime } from './actions/decrementWhiteTime'
+import { decrementBlackTime } from './actions/decrementBlackTime'
 
 const Input = styled.input`
   justify-content: center;
@@ -21,6 +22,16 @@ const Input = styled.input`
 
 class App extends Component {
 
+  handleStartGame = (id) => {
+    const settedTime = document.getElementById(id).value;
+    const whiteTimerID = setInterval(this.props.onDecrementWhiteTime, 1000);
+    this.props.onStartGame(settedTime,whiteTimerID);
+  };
+
+  handleChangeTurn(){
+    this.props.onChangeTurn();
+  }
+
   render(){
     return (
       <div className="App">
@@ -30,7 +41,7 @@ class App extends Component {
         <div>
           <Input id="time" type="number" placeholder="Minutes"/>
         </div>
-        <StartGameButton action={() => this.props.onStartGame(document.getElementById('time').value)} text="Start Game"/>
+        <StartGameButton onClick={() => this.handleStartGame('time')}>Start Game</StartGameButton>
           <div className="columnStyle">
             <p>White Player</p>
             <p>Black Player</p>
@@ -41,7 +52,7 @@ class App extends Component {
           <p className="timer">{this.props.whiteTimeRemaining}</p>
             <p className="timer">{this.props.blackTimeRemaining}</p>
           </div>
-          <ChangeTurnButton action={this.props.onChangeTurn} text={this.props.turn}/>
+          <ChangeTurnButton onClick={this.props.onChangeTurn}>{this.props.turn}' turn</ChangeTurnButton>
       </div>
     );
   }
@@ -57,7 +68,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onStartGame: (settedTime) => dispatch(startGame(settedTime)),
+    onStartGame: (settedTime,whiteTimerID) => dispatch(startGame(settedTime,whiteTimerID)),
     onChangeTurn: () => dispatch(changeTurn()),
     onDecrementWhiteTime: () => dispatch(decrementWhiteTime()),
   };
