@@ -1,7 +1,6 @@
-import React from 'react'
 import styled from 'styled-components'
 
-const MyButton = styled.button`
+const ChangeTurnButton = styled.button`
   color: black;
   border-color: lightslategray;
   font-size: x-large;
@@ -10,11 +9,5 @@ const MyButton = styled.button`
   margin-top: 20px;
   justify-self: center;
 `;
-
-const ChangeTurnButton = ({action,text}) => (
-    <MyButton onClick={action}>
-        {text}'s Turn
-    </MyButton>
-);
 
 export default ChangeTurnButton;

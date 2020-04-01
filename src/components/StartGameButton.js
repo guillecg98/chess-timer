@@ -1,7 +1,6 @@
-import React from 'react'
 import styled from 'styled-components'
 
-const MyButton = styled.button`
+const StartGameButton = styled.button`
   color: black;
   border-color: lightslategray;
   font-size: large;
@@ -10,11 +9,5 @@ const MyButton = styled.button`
   margin-top: 15px;
   justify-self: center;
 `;
-
-const StartGameButton = ({action,text}) => (
-    <MyButton onClick={action}>
-        {text}
-    </MyButton>
-);
 
 export default StartGameButton;
