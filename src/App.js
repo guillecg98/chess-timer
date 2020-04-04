@@ -45,6 +45,19 @@ class App extends Component {
     this.props.onChangeTurn();
   }
 
+  handleWinner(){
+    if(this.props.blackTimeOut){//white player wins
+      clearInterval(this.props.whiteTimerID);
+      clearInterval(this.props.blackTimerID);
+      alert("White Player Wins!")
+    }
+    if(this.props.whiteTimeOut){
+      clearInterval(this.props.whiteTimerID);
+      clearInterval(this.props.blackTimerID);
+      alert("Black Player Wins!")
+    }
+  }
+
   render(){
     return (
       <div className="App">
@@ -62,8 +75,8 @@ class App extends Component {
             <img src={require('./img/black-pawn.png')} alt="black pawn" height="150" width="150"/>
           </div>
           <div className="columnStyle">
-            <p className="timer">{this.props.whiteMinutesRemaining} mins {this.props.whiteSecondsRemaining} secs</p>
-            <p className="timer">{this.props.blackMinutesRemaining} mins {this.props.blackSecondsRemaining} secs</p>
+            <p className="timer" onChange={this.handleWinner()}>{this.props.whiteMinutesRemaining} mins {this.props.whiteSecondsRemaining} secs</p>
+            <p className="timer" onChange={this.handleWinner()}>{this.props.blackMinutesRemaining} mins {this.props.blackSecondsRemaining} secs</p>
           </div>
           <ChangeTurnButton onClick={() => this.handleChangeTurn()}>{this.props.turn}'s turn</ChangeTurnButton>
       </div>
@@ -80,6 +93,8 @@ const mapStateToProps = (state) => {
     whiteSecondsRemaining: state.whiteSecondsRemaining,
     blackTimerID: state.blackTimerID,
     whiteTimerID: state.whiteTimerID,
+    whiteTimeOut: state.whiteTimeOut,
+    blackTimeOut: state.blackTimeOut,
   };
 };
 

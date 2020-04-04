@@ -13,12 +13,16 @@ const initialState = {
     whiteSecondsRemaining: 0,
     whiteTimerID: null,
     blackTimerID: null,
+    whiteTimeOut: false,
+    blackTimeOut: false,
 };
 
 const reducer = (state = initialState, action) => {
 
     var newMinute = 0;
     var newSecond = 0;
+    var newWhiteTime = state.whiteTimeOut;
+    var newBlackTime = state.blackTimeOut;
     switch(action.type){
 
         case START_GAME: {
@@ -45,14 +49,22 @@ const reducer = (state = initialState, action) => {
             if(state.whiteSecondsRemaining !== 0){
                 newMinute = state.whiteMinutesRemaining;
                 newSecond = state.whiteSecondsRemaining - 1;
+                newWhiteTime = false;
             }else{
-                newMinute = state.whiteMinutesRemaining - 1;
-                newSecond = 60;
+                if(state.whiteMinutesRemaining === 0){
+                    newWhiteTime = true;
+                }else{
+                    newMinute = state.whiteMinutesRemaining - 1;
+                    newSecond = 60;
+                    newWhiteTime = false;
+                }
             }
+
             return {
                 ...state,
                 whiteMinutesRemaining: newMinute,
                 whiteSecondsRemaining: newSecond,
+                whiteTimeOut: newWhiteTime,
             }
         }
 
@@ -61,15 +73,22 @@ const reducer = (state = initialState, action) => {
             if(state.blackSecondsRemaining !== 0){
                 newMinute = state.blackMinutesRemaining;
                 newSecond = state.blackSecondsRemaining - 1;
+                newBlackTime = false;
             }else{
-                newMinute = state.blackMinutesRemaining - 1;
-                newSecond = 60;
+                if(state.blackMinutesRemaining === 0){
+                    newBlackTime = true;
+                }else{
+                    newMinute = state.blackMinutesRemaining - 1;
+                    newSecond = 60;
+                    newBlackTime = false;
+                }
             }
 
             return {
                 ...state,
                 blackMinutesRemaining: newMinute,
-                blackSecondsRemaining: newSecond ,
+                blackSecondsRemaining: newSecond,
+                blackTimeOut: newBlackTime,
             }
         }
 
